@@ -1,4 +1,4 @@
-# Interest-Calc
+# Yearly Interest Earned Calculator
 A C++ program to calculate the total interest earned and final balance of a savings account, given starting balance, 
 Annual interest rate, and monthly deposits
 
