@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 
-float CalcIntMonth(float &balance, float monthDeposit, float yearRate){ //Function to calculate earned interest, and update balance
+float CalcIntMonth(float &balance, float monthDeposit, float yearRate){ //Function to calculate earned interest, and update balance. For simplicity, balance is passed by reference
 float EarnedInt = 0; //initializing variable for Total Interest Earned
 float monthRate = yearRate / 12.0; //convert yearly interest rate to monthly interest rate and store in new variable
 
@@ -29,28 +29,28 @@ return EarnedInt; //Returning the Total Interest Earned for the month.
 string RemoveGarbage (string userString){ // Function for removing commas and spaces from user input
 
    
-    for (unsigned int i=0;i<userString.size();++i){
+    for (unsigned int i=0;i<userString.size();++i){ //For loop will look at each individual character in the string and remove spaces
       if (userString.at(i)==' '){
          userString.erase(i,1);
-         i=i-1;
+         i=i-1; //since a character is erased, the placement of characters after it shift down one, so i must also shift down 1
       }
     }
 	
-	for (unsigned int i=0;i<userString.size();++i){
+	for (unsigned int i=0;i<userString.size();++i){ //For loop will look at each individual character in the string and remove commas
       if (userString.at(i)==','){
          userString.erase(i,1);
-         i=i-1;
+         i=i-1; //since a character is erased, the placement of characters after it shift down one, so i must also shift down 1
       }
     }
 	
     return userString;
 }
 
-void FormatCurrency(string &output){ //Function for placing a comma where necessary, when the value is 1,000 or greater
-	int decimal = output.find('.');
+void FormatCurrency(string &output){ //Function for placing a comma where necessary, when the value is 1,000 or greater. Passed by reference for simplicity
+	int decimal = output.find('.'); //Variable is set to the place in the string that a decimal appears
 	
-	if (decimal > 3){
-		for (int i = (decimal - 3); i > 0; i -= 3){
+	if (decimal > 3){ //If there are more than three characters before the decimal, than the amoubt is over one thousand, and a comma is needed
+		for (int i = (decimal - 3); i > 0; i -= 3){ //Loop will execute for as long as there are at least three spaces to the left of the last comma placed, and place another one. 
 			output.insert(i, ",");
 		}
 	}
@@ -58,9 +58,9 @@ return;
 }
 
 string Rounding(string output){ //Function for formatting output to have two decimal places
-	int decimal = output.find('.');
-	int x = decimal+3;
-	while (decimal+3<output.size())
+	int decimal = output.find('.'); //Variable to hold where the decimal appears
+	int x = decimal+3; //Variable for identifying the character that should be deleted, as it is 3 spaces past the decimal
+	while (decimal+3<output.size()) //While loop checks whether there are more than 2 characters after the decimal. If there are, they are deleted until there are only two.
 	{
 		output.erase(x);
 	}
